@@ -1,4 +1,4 @@
-javascript
+
 const db = require('../config/database');
 
 class MenuItem {

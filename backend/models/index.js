@@ -1,4 +1,4 @@
-javascript
+
 // Central export for all models
 module.exports = {
   User: require('./User'),

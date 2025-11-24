@@ -9,6 +9,9 @@ dotenv.config();
 // Import database connection
 const db = require('./config/database');
 
+// Import error handler
+const errorHandler = require('./middleware/errorHandler');
+
 const app = express();
 
 // Middleware
@@ -36,7 +39,12 @@ app.get('/', (req, res) => {
   res.json({
     success: true,
     message: 'DineNDash API is running',
-    version: '1.0.0'
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      restaurants: '/api/restaurants',
+      dietaryPreferences: '/api/dietary-preferences'
+    }
   });
 });
 
@@ -49,6 +57,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// API Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/restaurants', require('./routes/restaurantRoutes'));
+app.use('/api/dietary-preferences', require('./routes/dietaryRoutes'));
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
@@ -58,14 +71,7 @@ app.use((req, res) => {
 });
 
 // Global error handler
-app.use((err, req, res, next) => {
-  console.error('Error:', err.stack);
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal server error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
-});
+app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;

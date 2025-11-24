@@ -171,7 +171,6 @@ CREATE TABLE reviews (
 -- ============================================
 -- Create a trigger to update restaurant rating
 -- ============================================
-DELIMITER //
 
 CREATE TRIGGER update_restaurant_rating_after_insert
 AFTER INSERT ON reviews
@@ -189,8 +188,7 @@ BEGIN
         WHERE restaurant_id = NEW.restaurant_id
     )
     WHERE id = NEW.restaurant_id;
-END//
-
+END;
 CREATE TRIGGER update_restaurant_rating_after_update
 AFTER UPDATE ON reviews
 FOR EACH ROW
@@ -202,7 +200,7 @@ BEGIN
         WHERE restaurant_id = NEW.restaurant_id
     )
     WHERE id = NEW.restaurant_id;
-END//
+END;
 
 CREATE TRIGGER update_restaurant_rating_after_delete
 AFTER DELETE ON reviews
@@ -220,6 +218,4 @@ BEGIN
         WHERE restaurant_id = OLD.restaurant_id
     )
     WHERE id = OLD.restaurant_id;
-END//
-
-DELIMITER ;
+END;
