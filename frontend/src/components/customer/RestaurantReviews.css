@@ -1,0 +1,199 @@
+.restaurant-reviews {
+    padding: 2rem 0;
+}
+
+.rating-summary {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+.average-rating {
+    text-align: center;
+}
+
+.rating-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.stars-display {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.stars-display .star {
+    font-size: 1.5rem;
+    color: #e2e8f0;
+}
+
+.stars-display .star.filled {
+    color: #f59e0b;
+}
+
+.total-reviews {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.rating-distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.distribution-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 40px;
+    align-items: center;
+    gap: 1rem;
+    transition: opacity 0.3s;
+}
+
+.distribution-row:hover {
+    opacity: 0.7;
+}
+
+.rating-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.rating-bar {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.rating-bar-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s;
+}
+
+.rating-count {
+    font-size: 0.85rem;
+    color: #718096;
+    text-align: right;
+}
+
+/* Filter Info */
+.filter-info {
+    background: #667eea;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-info button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.filter-info button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Reviews List */
+.reviews-display-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.review-item {
+    padding: 1.5rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.review-header-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.25rem;
+}
+
+.review-date-display {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.review-comment {
+    color: #4a5568;
+    line-height: 1.7;
+}
+
+.no-filtered-reviews,
+.no-reviews-yet {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+}
+
+.reviews-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+}
+
+@media (max-width: 768px) {
+    .rating-summary {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .distribution-row {
+        grid-template-columns: 50px 1fr 30px;
+    }
+
+    .review-header-display {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

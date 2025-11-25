@@ -1,0 +1,199 @@
+.restaurant-analytics {
+    padding: 2rem 0;
+}
+
+.analytics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.analytics-header h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+}
+
+.period-select {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.period-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.analytics-description {
+    color: #718096;
+    margin-bottom: 2rem;
+}
+
+.analytics-section {
+    margin-bottom: 3rem;
+}
+
+.analytics-section h4 {
+    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+}
+
+/* Busy Times Grid */
+.busy-times-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.busy-time-slot {
+    padding: 1rem;
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.busy-time-slot:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slot-time {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.slot-level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.slot-count {
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+/* Day-wise Grid */
+.day-wise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.day-card {
+    padding: 1.5rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.day-card:hover {
+    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.day-name {
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.day-bookings {
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.day-seats {
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+/* Insights */
+.insights-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    color: white;
+}
+
+.insights-section h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.insight-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.insight-icon {
+    font-size: 2.5rem;
+}
+
+.insight-content {
+    flex: 1;
+}
+
+.insight-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.insight-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.analytics-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #718096;
+}
+
+@media (max-width: 768px) {
+    .analytics-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .busy-times-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .day-wise-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
