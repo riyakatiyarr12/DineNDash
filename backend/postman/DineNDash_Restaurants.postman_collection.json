@@ -1,0 +1,217 @@
+{
+  "info": {
+    "name": "DineNDash - Restaurants & Menu",
+    "description": "Restaurant and menu management endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Restaurants",
+      "item": [
+        {
+          "name": "Get All Restaurants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurants by Cuisine",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants?cuisine_type=Italian",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"],
+              "query": [
+                {
+                  "key": "cuisine_type",
+                  "value": "Italian"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurants by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants?city=Bangalore",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Bangalore"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurants by Price Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants?price_range=$$",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"],
+              "query": [
+                {
+                  "key": "price_range",
+                  "value": "$$"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Restaurants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants?search=sushi",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "sushi"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurant by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/1",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Cuisine Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/cuisines",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "cuisines"]
+            }
+          }
+        },
+        {
+          "name": "Get Cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/cities",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "cities"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "item": [
+        {
+          "name": "Get Restaurant Menu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/1/menu",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "1", "menu"]
+            }
+          }
+        },
+        {
+          "name": "Get Menu by Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/1/menu?category=main_course",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "1", "menu"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "main_course"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Time Slots",
+      "item": [
+        {
+          "name": "Get Available Time Slots",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurants/1/timeslots?date=2024-12-01",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "1", "timeslots"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-12-01",
+                  "description": "Use format YYYY-MM-DD"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dietary Preferences",
+      "item": [
+        {
+          "name": "Get All Dietary Preferences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dietary-preferences",
+              "host": ["{{base_url}}"],
+              "path": ["dietary-preferences"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
