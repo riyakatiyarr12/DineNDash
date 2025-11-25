@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "DineNDash - Authentication",
-    "description": "Authentication endpoints for DineNDash",
+    "name": "DineNDash - Bookings",
+    "description": "Booking management endpoints",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -11,36 +11,34 @@
       "type": "string"
     },
     {
-      "key": "token",
+      "key": "customer_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "admin_token",
       "value": "",
       "type": "string"
     }
   ],
   "item": [
     {
-      "name": "Auth",
+      "name": "Customer - Bookings",
       "item": [
         {
-          "name": "Register Customer",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 201) {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.collectionVariables.set('token', jsonData.data.token);",
-                  "}"
-                ]
-              }
-            }
-          ],
+          "name": "Create Booking (with menu items)",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"testuser@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"9876543215\"\n}",
+              "raw": "{\n    \"restaurant_id\": 1,\n    \"booking_date\": \"2024-11-26\",\n    \"booking_time\": \"19:00:00\",\n    \"number_of_seats\": 4,\n    \"dietary_preference_id\": 1,\n    \"special_requests\": \"Window seat preferred, celebrating anniversary\",\n    \"menu_items\": [\n        {\n            \"menu_item_id\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"menu_item_id\": 2,\n            \"quantity\": 1\n        },\n        {\n            \"menu_item_id\": 4,\n            \"quantity\": 2\n        }\n    ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -48,33 +46,30 @@
               }
             },
             "url": {
-              "raw": "{{base_url}}/auth/register",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "register"]
+              "raw": "{{base_url}}/bookings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ]
             }
           }
         },
         {
-          "name": "Login Customer",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 200) {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.collectionVariables.set('token', jsonData.data.token);",
-                  "}"
-                ]
-              }
-            }
-          ],
+          "name": "Create Booking (without menu items)",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\"\n}",
+              "raw": "{\n    \"restaurant_id\": 2,\n    \"booking_date\": \"2024-11-27\",\n    \"booking_time\": \"20:00:00\",\n    \"number_of_seats\": 2,\n    \"dietary_preference_id\": 2,\n    \"special_requests\": \"Vegetarian options please\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -82,78 +77,264 @@
               }
             },
             "url": {
-              "raw": "{{base_url}}/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "login"]
+              "raw": "{{base_url}}/bookings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ]
             }
           }
         },
         {
-          "name": "Login Admin",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "if (pm.response.code === 200) {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.collectionVariables.set('token', jsonData.data.token);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"email\": \"admin@dinendash.com\",\n    \"password\": \"password123\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{base_url}}/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "login"]
-            }
-          }
-        },
-        {
-          "name": "Get My Profile",
+          "name": "Get My Bookings",
           "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}",
+                "value": "Bearer {{customer_token}}",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "{{base_url}}/auth/me",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "me"]
+              "raw": "{{base_url}}/bookings/my-bookings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "my-bookings"
+              ]
             }
           }
         },
         {
-          "name": "Update Profile",
+          "name": "Get My Bookings by Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/my-bookings?status=pending",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "my-bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Booking by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel Booking",
           "request": {
             "method": "PUT",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/1/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "1",
+                "cancel"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Bookings",
+      "item": [
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings?status=pending",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Bookings by Restaurant",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings?restaurant_id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "restaurant_id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Bookings by Date",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings?date=2024-11-26",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-11-26"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Bookings Count",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/pending/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "pending",
+                "count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve Booking",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
                 "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Updated Name\",\n    \"phone\": \"9876543299\"\n}",
+              "raw": "{\n    \"admin_notes\": \"Booking approved. Table prepared.\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -161,26 +342,32 @@
               }
             },
             "url": {
-              "raw": "{{base_url}}/auth/profile",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "profile"]
+              "raw": "{{base_url}}/bookings/1/approve",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "1",
+                "approve"
+              ]
             }
           }
         },
         {
-          "name": "Change Password",
+          "name": "Reject Booking",
           "request": {
             "method": "PUT",
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer {{token}}",
+                "value": "Bearer {{admin_token}}",
                 "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"currentPassword\": \"password123\",\n    \"newPassword\": \"newpassword123\"\n}",
+              "raw": "{\n    \"admin_notes\": \"Restaurant fully booked for that time slot.\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -188,9 +375,15 @@
               }
             },
             "url": {
-              "raw": "{{base_url}}/auth/change-password",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "change-password"]
+              "raw": "{{base_url}}/bookings/2/reject",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bookings",
+                "2",
+                "reject"
+              ]
             }
           }
         }

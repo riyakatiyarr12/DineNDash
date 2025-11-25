@@ -43,6 +43,7 @@ app.get('/', (req, res) => {
     endpoints: {
       auth: '/api/auth',
       restaurants: '/api/restaurants',
+      bookings: '/api/bookings',
       dietaryPreferences: '/api/dietary-preferences'
     }
   });
@@ -60,6 +61,7 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/restaurants', require('./routes/restaurantRoutes'));
+app.use('/api/bookings', require('./routes/bookingRoutes'));
 app.use('/api/dietary-preferences', require('./routes/dietaryRoutes'));
 
 // 404 handler
