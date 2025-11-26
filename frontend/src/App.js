@@ -17,22 +17,13 @@ import Restaurants from './pages/customer/Restaurants';
 import RestaurantDetail from './pages/customer/RestaurantDetail';
 import Booking from './pages/customer/Booking';
 import MyBookings from './pages/customer/MyBookings';
-
-//Reviews
 import MyReviews from './pages/customer/MyReviews';
 
-// Placeholder components (will be built in next modules)
-<Route
-  path="/customer/my-reviews"
-  element={
-    <ProtectedRoute requiredRole="customer">
-      <MyReviews />
-    </ProtectedRoute>
-  }
-/>
-const AdminDashboard = () => <div style={{ padding: '2rem' }}><h1>Admin - Dashboard (Coming in Module 11)</h1></div>;
-const AdminBookings = () => <div style={{ padding: '2rem' }}><h1>Admin - Bookings (Coming in Module 11)</h1></div>;
-const AdminAnalytics = () => <div style={{ padding: '2rem' }}><h1>Admin - Analytics (Coming in Module 11)</h1></div>;
+//Admin Pages
+import Dashboard from './pages/admin/Dashboard';
+import Bookings from './pages/admin/Bookings';
+import Analytics from './pages/admin/Analytics';
+import Reviews from './pages/admin/Reviews';
 
 function App() {
   return (
@@ -108,7 +99,7 @@ function App() {
                 path="/admin/dashboard"
                 element={
                   <ProtectedRoute requiredRole="admin">
-                    <AdminDashboard />
+                    <Dashboard />
                   </ProtectedRoute>
                 }
               />
@@ -116,7 +107,7 @@ function App() {
                 path="/admin/bookings"
                 element={
                   <ProtectedRoute requiredRole="admin">
-                    <AdminBookings />
+                    <Bookings />
                   </ProtectedRoute>
                 }
               />
@@ -124,7 +115,15 @@ function App() {
                 path="/admin/analytics"
                 element={
                   <ProtectedRoute requiredRole="admin">
-                    <AdminAnalytics />
+                    <Analytics />
+                  </ProtectedRoute>
+                }
+              />
+               <Route
+                path="/admin/reviews"
+                element={
+                  <ProtectedRoute requiredRole="admin">
+                    <Reviews />
                   </ProtectedRoute>
                 }
               />
